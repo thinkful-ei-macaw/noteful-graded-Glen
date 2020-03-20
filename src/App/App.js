@@ -15,6 +15,7 @@ import './App.css';
 
 class App extends Component {
 
+
   state = {
     notes: [],
     folders: []
@@ -76,8 +77,7 @@ class App extends Component {
 
   // }
 
-
-  componentDidMount() {
+  getFoldersAndNotes = () => {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/notes`),
       fetch(`${config.API_ENDPOINT}/folders`)
@@ -95,6 +95,19 @@ class App extends Component {
       .catch(error => {
         console.error({ error });
       });
+
+  }
+
+  componentDidUpdate(prevState) {
+
+    if (prevState.folders !== this.state.folders && prevState.notes !== this.state.notes) {
+      this.getFoldersAndNotes();
+    }
+  }
+
+
+  componentDidMount() {
+    this.getFoldersAndNotes();
   }
 
   handleDeleteNote = noteId => {

@@ -9,6 +9,7 @@ import history from './history';
 import 'typeface-roboto'
 import './index.css'
 import App from './App/App'
+import { ErrorBoundary } from './Errors/ErrorBoundary';
 
 library.add(faPlus, faChevronLeft, faTrashAlt, faCheckDouble)
 
@@ -16,7 +17,9 @@ library.add(faPlus, faChevronLeft, faTrashAlt, faCheckDouble)
 
 ReactDOM.render(
   <Router history={history}>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </Router>,
   document.getElementById('root')
 )
