@@ -20,7 +20,8 @@ class App extends Component {
     folders: []
   };
 
-
+  //two .then one is converting the response to a json string
+  //second dot then will have a json object which is the folder, you can then add to an array
 
   history = createBrowswerHistory;
   date = new Date();
@@ -30,9 +31,8 @@ class App extends Component {
       .post(`${config.API_ENDPOINT}/folders`, {
         name: JSON.stringify(folder)
       })
-      //two .then one is converting the response to a json string
-      //second dot then will have a json object which is the folder, you can then add to an array
-      .then(this.setState({ folders: [...this.state.folders], folder }))
+
+      .then(this.setState({ folders: [...this.state.folders, folder] }))
       .catch(function (error) {
         console.log(error);
       });
@@ -48,12 +48,14 @@ class App extends Component {
       headers: {
         'Content-Type': 'application/json',
       },
+
       body: JSON.stringify({
         name: name,
         modified: this.date,
         folderId: folderId,
         content: content
       })
+
     }
 
     )
