@@ -1,5 +1,6 @@
 import React from 'react';
 import ApiContext from '../ApiContext';
+import { withRouter } from 'react-router-dom';
 import createBrowswerHistory from '../history';
 
 
@@ -8,22 +9,21 @@ class AddNote extends React.Component {
     static contextType = ApiContext;
     history = createBrowswerHistory;
 
-
-
+    ShowTheLocationWithRouter = withRouter(AddNote);
 
     state = {
 
         name: '',
         modified: '',
-        folderId: '',
+        folderId: this.props.match.params.folderId,
         content: ''
 
     }
 
     handleSubmit = e => {
         e.preventDefault();
-        this.context.addNotes(this.state)
-
+        console.log(this.props.match.params)
+        this.context.addNotes(this.state.name, this.state.content, this.state.folderId)
     }
 
     render() {
@@ -45,4 +45,4 @@ class AddNote extends React.Component {
 
 
 
-export default AddNote;
+export default AddNote

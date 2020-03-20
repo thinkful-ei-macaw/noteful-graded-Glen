@@ -14,10 +14,13 @@ import config from '../config';
 import './App.css';
 
 class App extends Component {
+
   state = {
     notes: [],
     folders: []
   };
+
+
 
   history = createBrowswerHistory;
   date = new Date();
@@ -25,8 +28,10 @@ class App extends Component {
   addFolder = folder => {
     axios
       .post(`${config.API_ENDPOINT}/folders`, {
-        body: JSON.stringify(folder)
+        name: JSON.stringify(folder)
       })
+      //two .then one is converting the response to a json string
+      //second dot then will have a json object which is the folder, you can then add to an array
       .then(this.setState({ folders: [...this.state.folders], folder }))
       .catch(function (error) {
         console.log(error);
@@ -35,7 +40,8 @@ class App extends Component {
   };
 
 
-  addNotes = (name, content) => {
+  addNotes = (name, content, folderId) => {
+    console.log(this.props)
 
     fetch('http://localhost:9090/notes', {
       method: 'POST',
@@ -45,7 +51,7 @@ class App extends Component {
       body: JSON.stringify({
         name: name,
         modified: this.date,
-        folderId: match.params.folderId,
+        folderId: folderId,
         content: content
       })
     }
