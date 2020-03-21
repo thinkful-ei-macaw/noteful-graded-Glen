@@ -1,0 +1,12 @@
+.folder-form {
+    display: flex;
+    flex-direction: column;
+    line-height: 2.5em;
+    margin: auto;
+    width: 50%;
+    font-size: 1.5em;
+}
+
+.addFolder-btn {
+    margin-top: 1em;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import ApiContext from '../ApiContext';
-import { withRouter } from 'react-router-dom';
 import createBrowswerHistory from '../history';
+import '../Styles/AddNote.css';
 
 
 class AddNote extends React.Component {
@@ -9,7 +9,7 @@ class AddNote extends React.Component {
     static contextType = ApiContext;
     history = createBrowswerHistory;
 
-    ShowTheLocationWithRouter = withRouter(AddNote);
+
 
     state = {
 
@@ -30,19 +30,17 @@ class AddNote extends React.Component {
 
         return (
 
-            <form onSubmit={this.handleSubmit}>
+            <form class="add-note-form" onSubmit={this.handleSubmit}>
                 <label htmlFor="name">Name</label>
                 <input id="name" type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
                 <label htmlFor="content">Content</label>
-                <input id="content" value={this.state.content} onChange={e => this.setState({ content: e.target.value })} />
-                <button type="submit">Add New Note</button>
+                <textarea id="content" value={this.state.content} onChange={e => this.setState({ content: e.target.value })} />
+                <button class="note-btn" type="submit">Add New Note</button>
             </form>
         )
     }
 
 }
-
-
 
 
 export default AddNote

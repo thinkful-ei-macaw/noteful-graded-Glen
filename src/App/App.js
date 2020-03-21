@@ -21,6 +21,14 @@ class App extends Component {
     folders: []
   };
 
+  value = {
+    notes: this.state.notes,
+    folders: this.state.folders,
+    deleteNote: this.handleDeleteNote,
+    addFolder: this.addFolder,
+    addNotes: this.addNotes
+  };
+
   //two .then one is converting the response to a json string
   //second dot then will have a json object which is the folder, you can then add to an array
 
@@ -64,18 +72,6 @@ class App extends Component {
   }
 
 
-  // addFolder = (folder) => {
-
-  //   fetch('http://localhost:9090/folder', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(folder)
-
-  //   })
-
-  // }
 
   getFoldersAndNotes = () => {
     Promise.all([
@@ -105,7 +101,6 @@ class App extends Component {
     }
   }
 
-
   componentDidMount() {
     this.getFoldersAndNotes();
   }
@@ -125,7 +120,6 @@ class App extends Component {
         <Route path='/note/:noteId' component={NotePageNav} />
         <Route path='/add-folder' component={NotePageNav} />
         <Route path='/add-folder' component={AddFolder} />
-        <Route path='/add-note/folder/:folderId/addNote' component={AddNote} />
         <Route path='/add-note' component={NotePageNav} />
       </>
     );
@@ -143,15 +137,15 @@ class App extends Component {
   }
 
   render() {
-    const value = {
-      notes: this.state.notes,
-      folders: this.state.folders,
-      deleteNote: this.handleDeleteNote,
-      addFolder: this.addFolder,
-      addNotes: this.addNotes
-    };
+    // const value = {
+    //   notes: this.state.notes,
+    //   folders: this.state.folders,
+    //   deleteNote: this.handleDeleteNote,
+    //   addFolder: this.addFolder,
+    //   addNotes: this.addNotes
+    // };
     return (
-      <ApiContext.Provider value={value}>
+      <ApiContext.Provider value={this.value}>
         <div className='App'>
           <nav className='App__nav'>{this.renderNavRoutes()}</nav>
           <header className='App__header'>
@@ -160,7 +154,9 @@ class App extends Component {
               <FontAwesomeIcon icon='check-double' />
             </h1>
           </header>
-          <main className='App__main'>{this.renderMainRoutes()}</main>
+          <main className='App__main'>{this.renderMainRoutes()}
+            <Route path='/add-note/folder/:folderId/addNote' component={AddNote} />
+          </main>
         </div>
       </ApiContext.Provider>
     );

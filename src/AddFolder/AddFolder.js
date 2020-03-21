@@ -1,5 +1,6 @@
 import React from 'react';
 import ApiContext from '../ApiContext';
+import '../Styles/AddFolder.css';
 
 class AddFolder extends React.Component {
   static contextType = ApiContext;
@@ -14,11 +15,10 @@ class AddFolder extends React.Component {
   };
 
   render() {
-    console.log(this.context);
 
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
+        <form class="folder-form" onSubmit={this.handleSubmit}>
           <label htmlFor='newFolder'>Name of New Folder</label>
           <input
             required
@@ -29,9 +29,8 @@ class AddFolder extends React.Component {
             value={this.state.value}
             onChange={this.handleChange}
           />
-          <button type='submit'>Submit New Folder</button>
+          <button class="addFolder-btn" type='submit'>Submit New Folder</button>
         </form>
-        {/* {JSON.stringify(this.state.value)} */}
       </>
     );
   }
