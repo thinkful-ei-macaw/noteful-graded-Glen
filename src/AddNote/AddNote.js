@@ -32,9 +32,9 @@ class AddNote extends React.Component {
 
             <form class="add-note-form" onSubmit={this.handleSubmit}>
                 <label htmlFor="name">Name</label>
-                <input id="name" type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
+                <input id="name" type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} required />
                 <label htmlFor="content">Content</label>
-                <textarea id="content" value={this.state.content} onChange={e => this.setState({ content: e.target.value })} />
+                <textarea id="content" value={this.state.content} onChange={e => this.setState({ content: e.target.value })} required />
                 <button class="note-btn" type="submit">Add New Note</button>
             </form>
         )
