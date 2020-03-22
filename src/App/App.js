@@ -18,16 +18,11 @@ class App extends Component {
 
   state = {
     notes: [],
-    folders: []
+    folders: [],
+    shouldUpdate: true
   };
 
-  value = {
-    notes: this.state.notes,
-    folders: this.state.folders,
-    deleteNote: this.handleDeleteNote,
-    addFolder: this.addFolder,
-    addNotes: this.addNotes
-  };
+
 
   //two .then one is converting the response to a json string
   //second dot then will have a json object which is the folder, you can then add to an array
@@ -45,6 +40,11 @@ class App extends Component {
       .catch(function (error) {
         console.log(error);
       });
+    this.setState({
+      shouldUpdate: true
+    })
+
+
     this.history.goBack();
   };
 
@@ -68,6 +68,10 @@ class App extends Component {
     }
 
     )
+    this.setState({
+      shouldUpdate: true
+    })
+
     this.history.goBack();
   }
 
@@ -86,24 +90,33 @@ class App extends Component {
         return Promise.all([notesRes.json(), foldersRes.json()]);
       })
       .then(([notes, folders]) => {
-        this.setState({ notes, folders });
+        this.setState({ notes, folders, shouldUpdate: false });
       })
+
       .catch(error => {
         console.error({ error });
       });
 
   }
 
+  componentDidMount() {
+    this.getFoldersAndNotes();
+  }
+
+
+
   componentDidUpdate(prevState) {
 
-    if (prevState.folders !== this.state.folders && prevState.notes !== this.state.notes) {
+    if (this.state.shouldUpdate) {
       this.getFoldersAndNotes();
     }
   }
 
-  componentDidMount() {
-    this.getFoldersAndNotes();
-  }
+  //   if (prevState.folders.length !== this.state.folders.length && prevState.notes !== this.state.notes) {
+  //     this.getFoldersAndNotes();
+  //   }
+  // }
+
 
   handleDeleteNote = noteId => {
     this.setState({
@@ -137,15 +150,15 @@ class App extends Component {
   }
 
   render() {
-    // const value = {
-    //   notes: this.state.notes,
-    //   folders: this.state.folders,
-    //   deleteNote: this.handleDeleteNote,
-    //   addFolder: this.addFolder,
-    //   addNotes: this.addNotes
-    // };
+    const value = {
+      notes: this.state.notes,
+      folders: this.state.folders,
+      deleteNote: this.handleDeleteNote,
+      addFolder: this.addFolder,
+      addNotes: this.addNotes
+    };
     return (
-      <ApiContext.Provider value={this.value}>
+      <ApiContext.Provider value={value}>
         <div className='App'>
           <nav className='App__nav'>{this.renderNavRoutes()}</nav>
           <header className='App__header'>
