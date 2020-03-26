@@ -52,6 +52,7 @@ export default class NoteListMain extends React.Component {
             Note
           </CircleButton>
         </div>
+
       </section>
     )
   }

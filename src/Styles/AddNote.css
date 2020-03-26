@@ -16,3 +16,21 @@
     max-height: 20em;
     max-width: 40em;
 }
+
+select {
+    height: 2em;
+    font-size: .8em
+}
+
+.note-btn {
+    height: 2.5em
+}
+
+.note-btn:hover {
+    cursor: pointer
+}
+
+.name-input {
+    height: 2.5em;
+   
+}

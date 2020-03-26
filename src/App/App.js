@@ -36,7 +36,7 @@ class App extends Component {
         name: JSON.stringify(folder)
       })
 
-      .then(this.setState({ folders: [...this.state.folders, folder] }))
+      .then(() => this.setState({ folders: [...this.state.folders, folder] }))
       .catch(function (error) {
         console.log(error);
       });
@@ -145,6 +145,7 @@ class App extends Component {
           <Route exact key={path} path={path} component={NoteListMain} />
         ))}
         <Route path='/note/:noteId' component={NotePageMain} />
+
       </>
     );
   }
