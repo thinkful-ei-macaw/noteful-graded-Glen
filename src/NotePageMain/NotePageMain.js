@@ -2,6 +2,7 @@ import React from 'react'
 import Note from '../Note/Note'
 import ApiContext from '../ApiContext'
 import { findNote } from '../notes-helpers'
+import PropTypes from 'prop-types';
 import './NotePageMain.css'
 
 export default class NotePageMain extends React.Component {
@@ -12,12 +13,12 @@ export default class NotePageMain extends React.Component {
   }
   static contextType = ApiContext
 
-  handleDeleteNote = noteId => {
+  handleDeleteNote = () => {
     this.props.history.push(`/`)
   }
 
   render() {
-    const { notes=[] } = this.context
+    const { notes = [] } = this.context
     const { noteId } = this.props.match.params
     const note = findNote(notes, noteId) || { content: '' }
     return (
@@ -36,4 +37,10 @@ export default class NotePageMain extends React.Component {
       </section>
     )
   }
+}
+
+NotePageMain.propTypes = {
+
+  notes: PropTypes.array
+
 }

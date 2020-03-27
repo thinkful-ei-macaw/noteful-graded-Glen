@@ -1,5 +1,6 @@
 import React from 'react';
 import ApiContext from '../ApiContext';
+import PropTypes from 'prop-types';
 import '../Styles/AddFolder.css';
 
 class AddFolder extends React.Component {
@@ -18,7 +19,7 @@ class AddFolder extends React.Component {
 
     return (
       <>
-        <form class="folder-form" onSubmit={this.handleSubmit}>
+        <form className="folder-form" onSubmit={this.handleSubmit}>
           <label htmlFor='newFolder'>Name of New Folder</label>
           <input
             required
@@ -29,11 +30,17 @@ class AddFolder extends React.Component {
             value={this.state.value}
             onChange={this.handleChange}
           />
-          <button class="addFolder-btn" type='submit'>Submit New Folder</button>
+          <button className="addFolder-btn" type='submit'>Submit New Folder</button>
         </form>
       </>
     );
   }
+}
+
+AddFolder.propTypes = {
+
+  value: PropTypes.string.isRequired
+
 }
 
 export default AddFolder;

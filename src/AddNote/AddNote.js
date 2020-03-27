@@ -1,6 +1,7 @@
 import React from 'react';
 import ApiContext from '../ApiContext';
 import createBrowswerHistory from '../history';
+import PropTypes from 'prop-types';
 import '../Styles/AddNote.css';
 
 
@@ -47,6 +48,15 @@ class AddNote extends React.Component {
     }
 
 }
+
+AddNote.propTypes = {
+
+    name: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired
+
+}
+
+
 
 
 export default AddNote

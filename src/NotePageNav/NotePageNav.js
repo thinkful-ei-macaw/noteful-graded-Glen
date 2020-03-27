@@ -2,7 +2,9 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
+import PropTypes from 'prop-types';
 import { findNote, findFolder } from '../notes-helpers'
+
 import './NotePageNav.css'
 
 export default class NotePageNav extends React.Component {
@@ -17,7 +19,9 @@ export default class NotePageNav extends React.Component {
   static contextType = ApiContext;
 
   render() {
-    const { notes, folders, } = this.context
+    const { notes, folders } = this.context
+    console.log(notes)
+    console.log(folders)
     const { noteId } = this.props.match.params
     const note = findNote(notes, noteId) || {}
     const folder = findFolder(folders, note.folderId)
@@ -42,3 +46,11 @@ export default class NotePageNav extends React.Component {
     )
   }
 }
+
+NotePageNav.propTypes = {
+
+  folders: PropTypes.array,
+  notes: PropTypes.array
+
+}
+
